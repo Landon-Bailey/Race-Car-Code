@@ -11,12 +11,11 @@ main_window = Tk()
 
 #lane 1
 Beam_pin1 = 12
-Beam_pin2 = 16 #Hardware Issue
+Beam_pin2 = 16 
 #lane 2          
 Beam_pin3 = 23
 Beam_pin4 = 24
          
-
 
 startLane1 = 0
 startLane2 = 0
@@ -26,26 +25,35 @@ endLane2 = 0
 done1 = False
 done2 = False
 
+l1t = 0
+
 def start1(pin):
     print("Lane 1 started!")
     global startLane1
     startLane1 = time.time()
-    Timer(done1)
+    global l1t
+    #l1t = threading.Thread(target=Timer, args = (done1,))
+    #l1t.start()
 
 def start2(pin):
     print("Lane 2 started!")
     global startLane2
     startLane2 = time.time()
-    #Timer(done2)
+    #l2t = threading.Thread(target=Timer, args = (done2,))
+    #l2t.start()
     
 def end1(pin):
     print("Lane 1 finished!")
     global endLane1
-    endLane1 = time.time() 
+    endLane1 = time.time()
     print("Lane 1 took ", "{:.2f}".format((endLane1 - startLane1)), "seconds")
     global done1
     done1 = True
-    Timer(done1)
+    global l1t
+    #l1t = threading.Thread(target=Timer, args = (done1,))
+    #l1t.start()
+    Timer(startLane1,endLane1) 
+    
 
 def end2(pin):
     print("Lane 2 finished!")
@@ -54,13 +62,15 @@ def end2(pin):
     print("Lane 2 took ", "{:.2f}".format((endLane2 - startLane2)), "seconds")
     global done2
     done2 = True
+    Timer(startLane2,endLane2)
     
-def Timer(check):
-    if check == False:
+def Timer(start,end):
+    display_time = end - start
+    final_display_time = round(display_time,2)
+    display.print(str(final_display_time))
+    if final_display_time < 10:
         display[0] = "0"
-        display[1] = "0"
-        display[2] = "0"
-        display[3] = "0"
+        
         
     
     
@@ -91,6 +101,8 @@ def start_button():
     while not (done1 and done2):
         pass
 
+     
+    
     compareTimes()
     
     GPIO.cleanup()
@@ -113,6 +125,10 @@ def end_button():
     startLane2 = 0
     endLane1 =  0
     endLane2 = 0
+    display[0] = "-"
+    display[1] = "-"
+    display[2] = "-"
+    display[3] = "-"
     done1 = False
     done2 = False
     Label(main_window, text = "Race Track ready to go").grid(row = 2, column = 0)
@@ -123,7 +139,9 @@ def end_button():
 def quit_program():
     print("Exiting the Program...")
     quit()
-    
+   
+   
+   
 Label(main_window, text = "Race Car GUI Program").grid(row = 0, column = 0)
 Label(main_window, text = "Status of Race Track:").grid(row = 1, column = 0)
 Label(main_window, text = "Race Track ready to go").grid(row = 2, column = 0)

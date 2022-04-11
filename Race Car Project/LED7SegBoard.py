@@ -26,7 +26,7 @@ def Timer(check):
     display[2] = "-"
     display[3] = "-"
     
-    time.sleep(3)
+    #time.sleep(3)
     
     display[0] = str(count10)
     display[1] = str(count1)
