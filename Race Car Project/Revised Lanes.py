@@ -6,8 +6,18 @@ import board
 from adafruit_ht16k33.segments import BigSeg7x4
 
 i2c = board.I2C()
-display = BigSeg7x4(i2c)
+display1 = BigSeg7x4(i2c, address = 0x70)
+display2 = BigSeg7x4(i2c, address = 0x72)
 main_window = Tk()
+
+display1[0] = "-"
+display1[1] = "-"
+display1[2] = "-"
+display1[3] = "-"
+display2[0] = "-"
+display2[1] = "-"
+display2[2] = "-"
+display2[3] = "-"
 
 #lane 1
 Beam_pin1 = 12
@@ -52,7 +62,7 @@ def end1(pin):
     global l1t
     #l1t = threading.Thread(target=Timer, args = (done1,))
     #l1t.start()
-    Timer(startLane1,endLane1) 
+    Timer1(startLane1,endLane1) 
     
 
 def end2(pin):
@@ -62,14 +72,21 @@ def end2(pin):
     print("Lane 2 took ", "{:.2f}".format((endLane2 - startLane2)), "seconds")
     global done2
     done2 = True
-    Timer(startLane2,endLane2)
+    Timer2(startLane2,endLane2)
     
-def Timer(start,end):
+def Timer1(start,end):
     display_time = end - start
     final_display_time = round(display_time,2)
-    display.print(str(final_display_time))
+    display1.print(str(final_display_time))
     if final_display_time < 10:
-        display[0] = "0"
+        display1[0] = "0"
+
+def Timer2(start,end):
+    display_time = end - start
+    final_display_time = round(display_time,2)
+    display2.print(str(final_display_time))
+    if final_display_time < 10:
+        display2[0] = "0"
         
         
     
@@ -99,6 +116,7 @@ def start_button():
     GPIO.add_event_detect(Beam_pin4,GPIO.RISING,callback = end2)
     
     while not (done1 and done2):
+        
         pass
 
      
@@ -125,10 +143,14 @@ def end_button():
     startLane2 = 0
     endLane1 =  0
     endLane2 = 0
-    display[0] = "-"
-    display[1] = "-"
-    display[2] = "-"
-    display[3] = "-"
+    display1[0] = "-"
+    display1[1] = "-"
+    display1[2] = "-"
+    display1[3] = "-"
+    display2[0] = "-"
+    display2[1] = "-"
+    display2[2] = "-"
+    display2[3] = "-"
     done1 = False
     done2 = False
     Label(main_window, text = "Race Track ready to go").grid(row = 2, column = 0)

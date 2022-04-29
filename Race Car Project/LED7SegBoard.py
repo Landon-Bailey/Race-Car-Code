@@ -3,16 +3,17 @@ from adafruit_ht16k33.segments import BigSeg7x4
 import time
 
 i2c = board.I2C()
-display = BigSeg7x4(i2c)
+display1 = BigSeg7x4(i2c, address = 0x70)
+display2 = BigSeg7x4(i2c, address = 0x72)
 
-'''display.print(1234)
-display[0] = "A"
-display[1] = "C"
-display[2] = "L"
-display[3] = "F"
+display1[0] = "F"
+display2[0] = "A"
+'''bc23[1] = "C"
+bc23[2] = "L"
+bc23[3] = "F"
 '''
 
-
+'''
 def Timer(check):
     
     count10 = 0 #10
@@ -68,7 +69,7 @@ def Timer(check):
 
 check = False
 Timer(check)
-    
+ '''   
     
     
     
