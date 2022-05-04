@@ -116,7 +116,13 @@ def start_button():
     GPIO.add_event_detect(Beam_pin4,GPIO.RISING,callback = end2)
     
     while not (done1 and done2):
-        
+        '''
+        current_Time = time.time()
+        if done1 == False:
+                display1.print(str(current_Time - startLane1))
+        if done2 == False:
+                display2.print(str(current_Time - startLane2))         '''       
+                
         pass
 
      
