@@ -1,0 +1,74 @@
+README
+
+Brief Overview:
+
+This README file is for a Semester long Race Car Project. What the whole project is about is that it's supposed to take in the times of 2 different race cars that are going simultaneously, and decide the winner between the 2 when both of the race cars finish. How this is supposed to work is that each lane will consist of these materials: A pair of IR Break Beam Sensors, a time display, and a light display. The 2 race cars will each have their own lane and will start behind the first set of IR Break Beam Sensors. Once the Race Car goes past the IR Break Beam Sensor, a timer will start for that lane. That timer will keep going until the Race car goes past the last set of the IR Break Beam Sensor that is set up by the end of its lane. Then once both cars finish the race, both of the times will be compared and whatever the lowest time is will be the winner for that race. The times are both displayed on the 2 timers connected through the rasp pi I2c bus.
+
+
+Platform Requirements:
+
+Raspberry Pi and a Raspberry Pi Display 
+Coding IDE - Thonny IDE - Coding Language: Python
+
+
+Sequential Installation:
+
+
+HT16K33 library for the i2c timers
+Instructions and a guide for this here: https://learn.adafruit.com/adafruit-led-backpack/downloads?view=all 
+
+
+Configure:
+To get the project setup, you need to first provide power to the raspberry pi and allow it to turn on. You can use the display attached to control the pi, but we have had problems with that in the past where it is inverted or upside down. A mouse and keyboard greatly helps with these issues. Then, you must make sure the pi is connected to the hardware of the project, and make sure that all of the Raspberry pi sensor pairs are properly connected and pointed at each other. The pair labeled L1S is the start for lane one. This should be put at the start of one lane and the other pair labeled L1E should be put at the end of that track. The other track should have L2S at the start and L2E at the end of that track. If problems occur, first check that all wires are properly connected. Then if problems persist, redownload the program from github or try a backup SD card. This should basically reset the program to factory defaults where it is working well. 
+
+Running it:
+
+To start the system, you must first open up the program. In the upper left corner of the screen, then hover over the “programming” tab. Then click on the Thonny Python IDE” button which should automatically launch the program. If it does not, you will have to go into files and have to select “Race Car Program.py” to launch it. It should be in the github folder called “Race-Car-Code”. Once you have the program launched, then click the green button called “Run Current Script”. Once you click it, the GUI will pop up and you can enter the names of each racer. Make sure to click each enter button once you have typed in the names. Make sure to put the cars in the starting positions before you click the start button. When both cars are in their positions, you may start the track and launch the cars at will. It will sense when they leave the sensors, so you should press start before you actually launch them. Then the program and hardware should do the rest. The program will print out the time of each racer and display it on the led timers. Also, all times and names will be stored in a text file called “scores.txt”. You will have an archive of all races there. If you want to clear the file/reset it,right click on the file and click the “open with txt option”, then, simply go into the scores file and delete everything in there like you would on a word document. After finishing a race, you may either quit the program or reset the program using the GUI. If you choose to reset, you can put in new names and the program is ready to run again. Our program does not require names. 
+
+
+
+
+User Stories:
+
+As a programmer/engineer on this team, I want to complete this project in a timely manner.
+
+To do this...
+- I need to make sure that all the hardware needed is ordered as soon as possible-- Most is done, but make sure to get any remaining items ASAP (15 mins of work)
+- I need to complete the basic methods for this project during the first Sprint, so that most of the remaining ones can be focused on the hardware and physical components. (2+ hours of work)
+- Revise all goals on a weekly basis so we aren't doing work that doesn't contribute to the final goal (10 mins every week)
+
+As a user of this project, I want to have accurate timing and want this to be easy to use.
+
+I need to ...
+- Run tests to check how accurate the timing is (15 mins)
+- Have an easy display to show the timer to the users (1 hour)
+- Have an easy interface so the user can work the project (25 mins)
+
+As a developer of this project, I want to find a way to display the times and who won
+
+To do this, I need to:
+1) Purchase a display that can show two times, one for each racer -- Ask Mr. Hayes for advice on this (10 mins to order, 1 week to arrive)
+2) Write code to connect a light to the photoresistor, so it lights up once the laser is tripped. (no more than a half an hour)
+3) Connect the correct setup of electronics so that the LEDs can respond to the laser being tripped (10 mins)
+
+As a member of this project, I want to have the project running smoothly when tested
+
+To do this, I need to
+1) Test the wire that was ordered at different lengths, so we can verify the distance the information will be carried and how quick it will be carried. (20-30 mins)
+2) Make sure that the Photoresistor triggers whenever the laser is tripped (every single time). (5-10 mins)
+3) Do a proof of concept with all of our hardware, and demonstrate that we can get it to work for the final product (1 hour)
+
+Past Issues:
+
+Could not find a way to get the threading portion of the code to work
+It was hard to imagine where to place the photoresistors for the built track
+Getting the 7” display case on and working was difficult (Since joey broke it)
+A chip got fried  for the pi
+Previously struggled to connect the I2c timers to the pi, needing to change the address of one.
+
+
+
+Known Issues:
+7” display does not function properly, often it is inverted. Cannot find a proper fix for it.  - one solution is to use a mouse for the best possible experience
+
+  
